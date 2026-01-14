@@ -1,0 +1,122 @@
+/* =============================================
+   🎮 DEMO MODE BANNER STYLES
+   ============================================= */
+
+.demo-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  z-index: 9999;
+  animation: slideIn 0.3s ease-out;
+  max-width: 400px;
+}
+
+.demo-banner--minimized {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.demo-banner__content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.demo-banner__icon {
+  font-size: 1.5rem;
+}
+
+.demo-banner__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.demo-banner__text strong {
+  font-size: 0.95rem;
+}
+
+.demo-banner__text span {
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.demo-banner__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.demo-banner__btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.demo-banner__btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.demo-banner__btn--close:hover {
+  background: rgba(255, 59, 48, 0.6);
+}
+
+.demo-banner__expand {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4);
+  transition: all 0.2s;
+}
+
+.demo-banner__expand:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .demo-banner {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    max-width: none;
+  }
+
+  .demo-banner__text span {
+    display: none;
+  }
+}
