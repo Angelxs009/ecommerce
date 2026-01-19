@@ -85,6 +85,11 @@ const CarritoPage: React.FC = () => {
     }
   }, [isAuthenticated, carritoId, items, totalPrecio, navigate]);
 
+  // Scroll al inicio al cargar la página
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, []);
+
   // Cargar productos recomendados
   useEffect(() => {
     const cargarRecomendados = async () => {
