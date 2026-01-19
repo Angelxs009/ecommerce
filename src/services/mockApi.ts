@@ -113,6 +113,8 @@ export const mockApi = {
     limite?: number;
     pagina?: number;
     orden?: string;
+    precioMin?: number;
+    precioMax?: number;
   } = {}) {
     await delay();
     
@@ -131,6 +133,14 @@ export const mockApi = {
     // Filtrar por marca
     if (params.id_marca) {
       productos = productos.filter(p => p.id_marca === params.id_marca);
+    }
+    
+    // Filtrar por precio
+    if (params.precioMin !== undefined) {
+      productos = productos.filter(p => p.precio_venta >= params.precioMin!);
+    }
+    if (params.precioMax !== undefined) {
+      productos = productos.filter(p => p.precio_venta <= params.precioMax!);
     }
     
     // Ordenar

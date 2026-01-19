@@ -44,7 +44,9 @@ export const catalogoService = {
       busqueda: filtros?.busqueda,
       limite: filtros?.limite,
       pagina: filtros?.pagina,
-      orden: filtros?.ordenarPor
+      orden: filtros?.ordenarPor,
+      precioMin: filtros?.precioMin,
+      precioMax: filtros?.precioMax
     });
     
     return {
