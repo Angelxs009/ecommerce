@@ -13,6 +13,7 @@ import {
   getProductosByMarca,
   buscarProductos,
   getProductosEnPromocion,
+  actualizarStock,
   MockProducto
 } from './mockData';
 import storage from './storage.service';
@@ -476,6 +477,15 @@ export const mockApi = {
     await storage.addToHistorial('factura_creada', factura);
     
     return { status: 'success', data: factura };
+  },
+
+  // ==================== STOCK ====================
+  async descontarStock(items: { id_producto: string; cantidad: number }[]) {
+    await delay(200);
+    
+    actualizarStock(items);
+    
+    return { status: 'success', message: 'Stock actualizado correctamente' };
   }
 };
 

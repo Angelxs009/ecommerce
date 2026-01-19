@@ -314,3 +314,14 @@ export const getMarcaById = (id: number): MockMarca | undefined => {
 export const getCategoriaById = (id: number): MockCategoria | undefined => {
   return MOCK_CATEGORIAS.find(c => c.id_categoria === id);
 };
+
+// Función para actualizar el stock de productos después de una compra
+export const actualizarStock = (items: { id_producto: string; cantidad: number }[]): void => {
+  items.forEach(item => {
+    const producto = MOCK_PRODUCTOS.find(p => p.id_producto === item.id_producto);
+    if (producto) {
+      producto.saldo_actual = Math.max(0, producto.saldo_actual - item.cantidad);
+      console.log(`📦 Stock actualizado: ${producto.descripcion} -> ${producto.saldo_actual} unidades`);
+    }
+  });
+};

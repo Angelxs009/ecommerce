@@ -9,6 +9,7 @@ import { useAuth } from '../context/AuthContext';
 import { useCarrito } from '../context/CarritoContext';
 import { crearPago, pagarConTarjeta } from '../services/pago.service';
 import { crearFactura } from '../services/factura.service';
+import mockApi from '../services/mockApi';
 import './CheckoutPage.css';
 
 interface PedidoData {
@@ -240,7 +241,15 @@ const CheckoutPage: React.FC = () => {
                         });
                         console.log('✅ Pago registrado');
 
-                        // 2. Crear factura usando el SP sp_factura_crear
+                        // 2. Descontar stock de productos comprados
+                        const itemsParaStock = pedidoData.items.map((item: any) => ({
+                          id_producto: item.producto?.id_producto || item.id_producto,
+                          cantidad: item.cantidad
+                        }));
+                        await mockApi.descontarStock(itemsParaStock);
+                        console.log('📦 Stock descontado');
+
+                        // 3. Crear factura usando el SP sp_factura_crear
                         let facturaData = null;
                         if (user?.cliente?.id_cliente) {
                           const facturaResponse = await crearFactura({
@@ -252,7 +261,7 @@ const CheckoutPage: React.FC = () => {
                           console.log('📄 Factura creada:', facturaData);
                         }
 
-                        // 3. Guardar datos para la página de confirmación
+                        // 4. Guardar datos para la página de confirmación
                         const confirmacionData = {
                           pedidoId: pedidoData.id_pedido,
                           factura: facturaData,
@@ -337,7 +346,15 @@ const CheckoutPage: React.FC = () => {
                           const referencia = pagoResponse.data?.referencia || pagoResponse.data?.id_pago;
                           console.log('✅ Pago con tarjeta aprobado:', referencia);
 
-                          // 2. Crear factura
+                          // 2. Descontar stock de productos comprados
+                          const itemsParaStock = pedidoData.items.map((item: any) => ({
+                            id_producto: item.producto?.id_producto || item.id_producto,
+                            cantidad: item.cantidad
+                          }));
+                          await mockApi.descontarStock(itemsParaStock);
+                          console.log('📦 Stock descontado');
+
+                          // 3. Crear factura
                           let facturaData = null;
                           if (user?.cliente?.id_cliente) {
                             const facturaResponse = await crearFactura({
@@ -349,7 +366,7 @@ const CheckoutPage: React.FC = () => {
                             console.log('📄 Factura creada:', facturaData);
                           }
 
-                          // 3. Guardar datos para confirmación
+                          // 4. Guardar datos para confirmación
                           const confirmacionData = {
                             pedidoId: pedidoData.id_pedido,
                             factura: facturaData,
