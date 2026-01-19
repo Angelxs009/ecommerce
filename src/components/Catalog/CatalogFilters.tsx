@@ -24,6 +24,15 @@ const CatalogFilters: React.FC<CatalogFiltersProps> = ({
   isOpen,
   onClose,
 }) => {
+  const [precioMinLocal, setPrecioMinLocal] = React.useState<string>(filtros.precioMin?.toString() || '');
+  const [precioMaxLocal, setPrecioMaxLocal] = React.useState<string>(filtros.precioMax?.toString() || '');
+
+  // Sincronizar estados locales cuando cambian los filtros
+  React.useEffect(() => {
+    setPrecioMinLocal(filtros.precioMin?.toString() || '');
+    setPrecioMaxLocal(filtros.precioMax?.toString() || '');
+  }, [filtros.precioMin, filtros.precioMax]);
+
   const handleCategoriaChange = (categoriaId: number | undefined) => {
     onFiltrosChange({
       categoriaId,
@@ -174,7 +183,8 @@ const CatalogFilters: React.FC<CatalogFiltersProps> = ({
                 <input
                   type="number"
                   placeholder={filtrosDinamicos?.precioRango?.min?.toString() || '0'}
-                  defaultValue={filtros.precioMin || ''}
+                  value={precioMinLocal}
+                  onChange={(e) => setPrecioMinLocal(e.target.value)}
                   onBlur={(e) => {
                     const valor = e.target.value ? parseFloat(e.target.value) : undefined;
                     onFiltrosChange({ precioMin: valor });
@@ -198,7 +208,8 @@ const CatalogFilters: React.FC<CatalogFiltersProps> = ({
                 <input
                   type="number"
                   placeholder={filtrosDinamicos?.precioRango?.max?.toString() || '500'}
-                  defaultValue={filtros.precioMax || ''}
+                  value={precioMaxLocal}
+                  onChange={(e) => setPrecioMaxLocal(e.target.value)}
                   onBlur={(e) => {
                     const valor = e.target.value ? parseFloat(e.target.value) : undefined;
                     onFiltrosChange({ precioMax: valor });
