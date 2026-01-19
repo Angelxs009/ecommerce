@@ -238,11 +238,6 @@ const CatalogoPage: React.FC = () => {
     handleFiltrosChange({ ordenarPor: e.target.value as FiltrosProducto['ordenarPor'] });
   };
 
-  const handleVerDetalle = (producto: Producto) => {
-    setProductoDetalle(producto);
-    setModalAbierto(true);
-  };
-
   // Datos de prueba (cuando no hay backend)
   const getProductosDePrueba = (): Producto[] => [
     {
@@ -472,7 +467,6 @@ const CatalogoPage: React.FC = () => {
                         <ProductCard
                           key={producto.id_producto}
                           producto={producto}
-                          onVerDetalle={handleVerDetalle}
                         />
                       ))}
                     </div>

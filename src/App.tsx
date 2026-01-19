@@ -13,6 +13,7 @@ import useKeyboardShortcuts from './hooks/useKeyboardShortcuts';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import CatalogoPage from './pages/CatalogoPage';
+import ProductoDetalladoPage from './pages/ProductoDetalladoPage';
 import PromocionesPage from './pages/PromocionesPage';
 import ContactoPage from './pages/ContactoPage';
 import AcercaPage from './pages/AcercaPage';
@@ -64,6 +65,7 @@ const RouterContent: React.FC<{ showKeyboardHelp: boolean; setShowKeyboardHelp: 
         {/* Rutas públicas */}
         <Route path="/" element={<HomePage />} />
         <Route path="/catalogo" element={<CatalogoPage />} />
+        <Route path="/producto/:id" element={<ProductoDetalladoPage />} />
         <Route path="/promociones" element={<PromocionesPage />} />
         <Route path="/contacto" element={<ContactoPage />} />
         <Route path="/acerca" element={<AcercaPage />} />

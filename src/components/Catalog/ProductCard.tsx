@@ -8,7 +8,7 @@ import './ProductCard.css';
 
 interface ProductCardProps {
   producto: Producto;
-  onVerDetalle: (producto: Producto) => void;
+  onVerDetalle?: (producto: Producto) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ producto, onVerDetalle }) => {
@@ -48,6 +48,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ producto, onVerDetalle }) => 
   const handleToggleFavorito = (e: React.MouseEvent) => {
     e.stopPropagation();
     toggleFavorito(producto.id_producto);
+  };
+
+  const handleVerDetalle = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    navigate(`/producto/${producto.id_producto}`);
   };
 
   const formatearPrecio = (precio: number) => {
@@ -94,7 +99,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ producto, onVerDetalle }) => 
       <div className="product-card__image">
         <button
           className="product-card__image-btn"
-          onClick={() => onVerDetalle(producto)}
+          onClick={handleVerDetalle}
           aria-label={`Ver detalles de ${producto.descripcion}`}
           type="button"
         >
@@ -112,7 +117,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ producto, onVerDetalle }) => 
         <div className="product-card__overlay" aria-hidden="true">
           <button 
             className="product-card__ver-detalle"
-            onClick={() => onVerDetalle(producto)}
+            onClick={handleVerDetalle}
             tabIndex={-1}
             type="button"
           >
@@ -133,7 +138,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ producto, onVerDetalle }) => 
         <h3 className="product-card__nombre">
           <button
             className="product-card__nombre-btn"
-            onClick={() => onVerDetalle(producto)}
+            onClick={handleVerDetalle}
             type="button"
           >
             {producto.descripcion}
