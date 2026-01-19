@@ -160,50 +160,6 @@ const CatalogFilters: React.FC<CatalogFiltersProps> = ({
           </div>
         )}
 
-        {/* PRECIO */}
-        <div className="filter-section">
-          <h4 className="filter-title">
-            <i className="fas fa-dollar-sign"></i>
-            Precio
-          </h4>
-          <div className="filter-price-range">
-            <div className="price-input-group">
-              <label>Mínimo</label>
-              <div className="price-input">
-                <span>$</span>
-                <input
-                  type="number"
-                  placeholder={filtrosDinamicos?.precioRango?.min?.toString() || '0'}
-                  value={filtros.precioMin || ''}
-                  onChange={(e) => {
-                    const valor = e.target.value ? parseFloat(e.target.value) : undefined;
-                    onFiltrosChange({ precioMin: valor });
-                  }}
-                  min="0"
-                  step="1"
-                />
-              </div>
-            </div>
-            <div className="price-divider">-</div>
-            <div className="price-input-group">
-              <label>Máximo</label>
-              <div className="price-input">
-                <span>$</span>
-                <input
-                  type="number"
-                  placeholder={filtrosDinamicos?.precioRango?.max?.toString() || '500'}
-                  value={filtros.precioMax || ''}
-                  onChange={(e) => {
-                    const valor = e.target.value ? parseFloat(e.target.value) : undefined;
-                    onFiltrosChange({ precioMax: valor });
-                  }}
-                  min="0"
-                  step="1"
-                />
-              </div>
-            </div>
-          </div>
-
         {/* ORIGEN (dinámico) */}
         {filtrosDinamicos?.origenes && filtrosDinamicos.origenes.length > 0 && (
           <div className="filter-section">
